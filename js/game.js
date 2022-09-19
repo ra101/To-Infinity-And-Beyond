@@ -5,12 +5,13 @@ const KEY_CODE_SPACE = 32;
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 600;
 
-const PLAYER_WIDTH = 20;
-const PLAYER_MAX_SPEED = 600.0;
+const PLAYER_WIDTH = 40;
+const PLAYER_MAX_SPEED = 300.0;
 const LASER_MAX_SPEED = 300.0;
 const LASER_COOLDOWN = 0.5;
 
-const ENEMIES_PER_ROW = 10;
+// only odd number of enemy
+const ENEMIES_PER_ROW = 7;
 const ENEMY_HORIZONTAL_PADDING = 80;
 const ENEMY_VERTICAL_PADDING = 70;
 const ENEMY_VERTICAL_SPACING = 80;
@@ -221,9 +222,18 @@ function init() {
 
   const enemySpacing =
     (GAME_WIDTH - ENEMY_HORIZONTAL_PADDING * 2) / (ENEMIES_PER_ROW - 1);
-  for (let j = 0; j < 3; j++) {
+
+  for (let i = 0; i < ENEMIES_PER_ROW; i += (ENEMIES_PER_ROW - 1) / 2) {
+    const x = i * enemySpacing + ENEMY_HORIZONTAL_PADDING;
+    createEnemy($container, x, ENEMY_VERTICAL_PADDING + ENEMY_VERTICAL_SPACING);
+  }
+
+  for (let j = 0; j < 3; j += 2) {
     const y = ENEMY_VERTICAL_PADDING + j * ENEMY_VERTICAL_SPACING;
     for (let i = 0; i < ENEMIES_PER_ROW; i++) {
+      if (i % ((ENEMIES_PER_ROW - 1) / 2) === 0) {
+        continue;
+      }
       const x = i * enemySpacing + ENEMY_HORIZONTAL_PADDING;
       createEnemy($container, x, y);
     }
