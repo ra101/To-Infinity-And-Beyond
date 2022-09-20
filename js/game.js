@@ -16,7 +16,7 @@ const ENEMY_HORIZONTAL_PADDING = 80;
 const ENEMY_VERTICAL_PADDING = 70;
 const ENEMY_VERTICAL_SPACING = 80;
 const ENEMY_COOLDOWN = 5.0;
-// const space_sound = new Audio("sound/space.ogg")
+const space_sound = document.getElementById("space-sound")
 
 const GAME_STATE = {
   lastTime: Date.now(),
@@ -254,6 +254,9 @@ function playerHasWon() {
 }
 
 function update(e) {
+  if (space_sound.played.length === 0) {
+    space_sound.play()
+  }
   const currentTime = Date.now();
   const dt = (currentTime - GAME_STATE.lastTime) / 1000.0;
 
@@ -325,4 +328,3 @@ init();
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
 window.requestAnimationFrame(update);
-document.getElementById("space-sound").play()
