@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <audio preload="auto" src="./sound/space.ogg" autoplay loop></audio>
+  <audio id="space-sound" preload="auto" src="./sound/space.ogg" autoplay loop></audio>
   <div class="wrap">
     <div class="sticky header">2️⃣ ♾️ ➕ 🚀</div>
     <div class="game-wrapper">
@@ -19,18 +19,15 @@
       <div class="game">
       </div>
       <div class="congratulations">
-        <h1>Congratulations!</h1>
-        <h2>You won the game</h2>
-        <button class="btn" onclick="window.location.reload()">Restart</button>
+        <h1><a href="https://github.com/ra101/To-Infinity-And-Beyond">source_code</a></h1>
       </div>
       <div class="game-over">
-        <h1>GAME OVER</h1>
-        <h2>You lost the game</h2>
-        <button class="btn" onclick="window.location.reload()">Restart</button>
+        <h1><a href="https://ra101.github.io">Ready to meet your maker?</a></h1>
       </div>
     </div>
-    <div class="sticky footer">🕹️: <span style="color:lightgreen;">◄</span> | <span style="color:lightgreen;">⎵</span> | <span style="color:lightgreen;">►</span></div>
+    <div class="sticky footer" id="controls"><span style="filter:drop-shadow(0px 0px 2px red);">🕹️</span>: <span style="color:lightgreen;filter:drop-shadow(0px 0px 2px yellowgreen);">◄</span> | <span style="color:lightgreen;filter:drop-shadow(0px 0px 2px yellowgreen);">⎵</span> | <span style="color:lightgreen;filter:drop-shadow(0px 0px 2px yellowgreen);">►</span></div>
     <div class="sticky footer author"><span style="color:slategray;">~</span>〈 RA 〉</div>
+    <div class="sticky footer" id="restart-prompt" onclick="window.location.reload()"><span style="color:lightgreen;filter:drop-shadow(0px 0px 3px darkgreen);">Explore Another Universe?</span></div>
   </div>
   <script src="js/game.js"></script>
 </body>

@@ -32,6 +32,12 @@ const GAME_STATE = {
   gameOver: false
 };
 
+function toggle_class(element_class, old_cls, new_cls) {
+  ele_clist = document.querySelector(element_class).classList;
+  ele_clist.add(new_cls);
+  ele_clist.remove(old_cls);
+}
+
 // space_sound.loop = true
 
 function rectsIntersect(r1, r2) {
@@ -253,11 +259,33 @@ function update(e) {
 
   if (GAME_STATE.gameOver) {
     document.querySelector(".game-over").style.display = "block";
+
+    document.getElementById("controls").style.display = "none";
+    document.getElementById("restart-prompt").style.display = "block";
+    re_st = document.getElementById("restart-prompt").children[0].style
+    re_st.color = 'salmon'
+    re_st.filter = 'drop-shadow(darkred 0px 0px 3px)'
+
+    toggle_class(".stars-upper", "stars", "infinity-upper")
+    toggle_class(".stars-lower", "stars", "infinity-lower")
+
+    document.querySelectorAll(".enemy").forEach((node) => { node.parentNode.removeChild(node) })
+    document.querySelectorAll(".laser").forEach((node) => { node.parentNode.removeChild(node) })
+    document.querySelectorAll(".enemy-laser").forEach((node) => { node.parentNode.removeChild(node) })
+
     return;
   }
 
   if (playerHasWon()) {
+    document.getElementById("controls").style.display = "none";
+    document.getElementById("restart-prompt").style.display = "block";
+    document.querySelectorAll(".laser").forEach((node) => { node.parentNode.removeChild(node) })
+    document.querySelectorAll(".enemy-laser").forEach((node) => { node.parentNode.removeChild(node) })
+
     document.querySelector(".congratulations").style.display = "block";
+    toggle_class(".player", "player", "winner")
+    toggle_class(".stars-upper", "stars", "infinity-upper")
+    toggle_class(".stars-lower", "stars", "infinity-lower")
     return;
   }
 
@@ -297,3 +325,4 @@ init();
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
 window.requestAnimationFrame(update);
+document.getElementById("space-sound").play()
