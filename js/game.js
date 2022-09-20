@@ -2,8 +2,8 @@ const KEY_CODE_LEFT = 37;
 const KEY_CODE_RIGHT = 39;
 const KEY_CODE_SPACE = 32;
 
-const GAME_WIDTH = 800;
-const GAME_HEIGHT = 600;
+const GAME_HEIGHT = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+const GAME_WIDTH = GAME_HEIGHT * 4 / 3;
 
 const PLAYER_WIDTH = 40;
 const PLAYER_MAX_SPEED = 300.0;
@@ -62,9 +62,9 @@ function rand(min, max) {
 
 function createPlayer($container) {
   GAME_STATE.playerX = GAME_WIDTH / 2;
-  GAME_STATE.playerY = GAME_HEIGHT - 50;
+  GAME_STATE.playerY = GAME_HEIGHT * 0.9 - 65;
   const $player = document.createElement("img");
-  $player.src = "img/player-blue-1.png";
+  $player.src = "img/player.svg";
   $player.className = "player";
   $container.appendChild($player);
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
@@ -148,7 +148,7 @@ function destroyLaser($container, laser) {
 
 function createEnemy($container, x, y) {
   const $element = document.createElement("img");
-  $element.src = "img/enemy-blue-1.png";
+  $element.src = "img/enemy.svg";
   $element.className = "enemy";
   $container.appendChild($element);
   const enemy = {
@@ -187,7 +187,7 @@ function destroyEnemy($container, enemy) {
 
 function createEnemyLaser($container, x, y) {
   const $element = document.createElement("img");
-  $element.src = "img/laser-red-5.png";
+  $element.src = "img/laser-red-16.png";
   $element.className = "enemy-laser";
   $container.appendChild($element);
   const laser = { x, y, $element };

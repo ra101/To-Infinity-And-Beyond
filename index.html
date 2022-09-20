@@ -10,10 +10,12 @@
 
 <body>
   <div class="wrap">
-    <header>Space Game</header>
+    <div class="sticky header">2️⃣ ♾️ ➕ 🚀</div>
     <div class="game-wrapper">
+      <div class="stars stars-upper"></div>
+      <div class="stars stars-lower"></div>
+
       <div class="game">
-        <div class="stars"></div>
       </div>
       <div class="congratulations">
         <h1>Congratulations!</h1>
@@ -26,7 +28,8 @@
         <button class="btn" onclick="window.location.reload()">Restart</button>
       </div>
     </div>
-    <footer>Left/right keys to move, spacebar to shoot</footer>
+    <div class="sticky footer">🕹️: <span style="color:lightgreen;">◄</span> | <span style="color:lightgreen;">⎵</span> | <span style="color:lightgreen;">►</span></div>
+    <div class="sticky footer author"><span style="color:slategray;">~</span>〈 RA 〉</div>
   </div>
   <script src="js/game.js"></script>
 </body>
