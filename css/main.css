@@ -31,6 +31,10 @@ body {
   font-size: large;
 }
 
+.header span {
+  filter: drop-shadow(0px 0px 5px black);
+}
+
 .footer {
   bottom: 0px;
 }
@@ -132,12 +136,25 @@ body {
 }
 
 .winner {
-  width: 50px;
-  margin-left: -25px;
   position: absolute;
-  animation: float-player 3s ease-in-out infinite, beyond-inf-player 1s ease-in-out forwards;
+  margin-left: -25px;
+  animation: float-player 3s ease-in-out infinite, beyond-inf-player 1s ease-out forwards;
   filter: drop-shadow(0px 3px 3px rgb(113, 74, 0));
+  width: 50px;
+  z-index: 1;
 }
+
+
+.looser {
+  position: absolute;
+  margin-left: -30px;
+  margin-top: -18px;
+  animation: float-enemy .3s ease-in-out infinite, beyond-inf-enemy 1s ease-out forwards;
+  filter: drop-shadow(0px -3px 3px rgb(0, 70, 0));
+  width: 60px;
+}
+
+
 
 .game .laser {
   position: absolute;
@@ -160,20 +177,30 @@ body {
   position: absolute;
   font-size: 1.5rem;
   /* background: #c7a526; */
-  color: green;
   padding: 20px 50px;
   font-family: 'Courier New', Courier, monospace;
-  filter: drop-shadow(0px 0px 10px darkgreen);
   text-align: center;
+  border-bottom: 1px;
   top: 25vh;
   animation: pop-in 1s;
 }
 
-a:link,
-a:visited,
-a:hover,
-a:active {
+.game-over a:link,
+.game-over a:visited,
+.game-over a:hover,
+.game-over a:active {
+  color: #a979d9;
+  filter: drop-shadow(0px 0px 7px #561e8f);
+  border-bottom: #561e8f double .3rem;
+  text-decoration: none;
+}
+
+.congratulations a:link,
+.congratulations a:visited,
+.congratulations a:hover,
+.congratulations a:active {
   color: green;
+  filter: drop-shadow(0px 0px 7px darkgreen);
   text-decoration: none;
 }
 
@@ -181,20 +208,6 @@ a:active {
 .congratulations:hover {
   cursor: pointer;
 }
-
-/*
-.game-over {
-  display: none;
-  position: absolute;
-  color: gold;
-  font-size: 2rem;
-  filter: drop-shadow(0px 0px 25px orangered);
-  padding: 20px 50px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  text-align: center;
-  animation: pop-in 1s;
-  top: 1rem;
-} */
 
 #restart-prompt {
   display: none;
@@ -247,7 +260,12 @@ a:active {
   }
 }
 
-
+@keyframes beyond-inf-enemy {
+  100% {
+    translate: 0 100vh;
+    opacity: 0;
+  }
+}
 
 @keyframes beyond-inf-player {
   100% {

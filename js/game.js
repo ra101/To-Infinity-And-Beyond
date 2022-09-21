@@ -33,9 +33,9 @@ const GAME_STATE = {
 };
 
 function toggle_class(element_class, old_cls, new_cls) {
-  ele_clist = document.querySelector(element_class).classList;
-  ele_clist.add(new_cls);
-  ele_clist.remove(old_cls);
+  document.querySelectorAll(element_class).forEach(
+    (node) => { node.classList.add(new_cls); node.classList.remove(old_cls); }
+  );
 }
 
 // space_sound.loop = true
@@ -82,7 +82,7 @@ function createPlayer($container) {
 function destroyPlayer($container, player) {
   $container.removeChild(player);
   GAME_STATE.gameOver = true;
-  const audio = new Audio("sound/lose.ogg");
+  const audio = new Audio("sound/hit.ogg");
   audio.play();
 }
 
@@ -190,6 +190,8 @@ function updateEnemies(dt, $container) {
 }
 
 function destroyEnemy($container, enemy) {
+  const audio = new Audio("sound/hit.ogg");
+  audio.play();
   $container.removeChild(enemy.$element);
   enemy.isDead = true;
 }
@@ -261,18 +263,19 @@ function update(e) {
   const dt = (currentTime - GAME_STATE.lastTime) / 1000.0;
 
   if (GAME_STATE.gameOver) {
+    const audio = new Audio("sound/lose.ogg");
+    audio.play();
+    space_sound.pause()
     document.querySelector(".game-over").style.display = "block";
 
     document.getElementById("controls").style.display = "none";
     document.getElementById("restart-prompt").style.display = "block";
-    re_st = document.getElementById("restart-prompt").children[0].style
-    re_st.color = 'salmon'
-    re_st.filter = 'drop-shadow(darkred 0px 0px 3px)'
+    document.getElementById("restart-prompt").children[0].style.filter = 'drop-shadow(darkred 0px 0px 3px)'
 
+    toggle_class(".enemy", "enemy", "looser")
     toggle_class(".stars-upper", "stars", "infinity-upper")
     toggle_class(".stars-lower", "stars", "infinity-lower")
 
-    document.querySelectorAll(".enemy").forEach((node) => { node.parentNode.removeChild(node) })
     document.querySelectorAll(".laser").forEach((node) => { node.parentNode.removeChild(node) })
     document.querySelectorAll(".enemy-laser").forEach((node) => { node.parentNode.removeChild(node) })
 
@@ -280,6 +283,9 @@ function update(e) {
   }
 
   if (playerHasWon()) {
+    const audio = new Audio("sound/win.ogg");
+    audio.play();
+    space_sound.pause()
     document.getElementById("controls").style.display = "none";
     document.getElementById("restart-prompt").style.display = "block";
     document.querySelectorAll(".laser").forEach((node) => { node.parentNode.removeChild(node) })
@@ -328,3 +334,7 @@ init();
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
 window.requestAnimationFrame(update);
+
+space_sound.addEventListener("canplaythrough", () => {
+  if (space_sound.played.length === 0) { space_sound.play(); }
+});
