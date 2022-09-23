@@ -1,6 +1,6 @@
 
 <div align="center">
- <a href="https://https://2️⃣♾️➕🚀.ra101.dev" alt="https://https://2️⃣♾️➕🚀.ra101.dev" ><h1> https://2️⃣♾️➕🚀.ra101.dev </h1> </a>
+ <h1><a href="https://https://2️⃣♾️➕🚀.ra101.dev" alt="https://https://2️⃣♾️➕🚀.ra101.dev" > https://2️⃣♾️➕🚀.ra101.dev  </a></h1>
  <p align="center">
   <img src="./.github/screenshot.png" alt="Aliens in an infinity battle formation, destroy them and go beyond infinity, or meet the maker">
 
